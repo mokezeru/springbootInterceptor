@@ -16,24 +16,23 @@ public class LoggerInterceptor implements HandlerInterceptor {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Override
-	public void afterCompletion(HttpServletRequest request,
-			HttpServletResponse response, Object object, Exception arg3)
-			throws Exception {
-		log.info("Request is complete");
+	public boolean preHandle(HttpServletRequest request,
+			HttpServletResponse response, Object object) throws Exception {
+		log.info("Before Handler execution");
+		return true;
 	}
-
+	
 	@Override
 	public void postHandle(HttpServletRequest request,
 			HttpServletResponse response, Object object, ModelAndView model)
 			throws Exception {
 		log.info("Handler execution is complete");
 	}
-
+	
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object object) throws Exception {
-		log.info("Before Handler execution");
-		return true;
+	public void afterCompletion(HttpServletRequest request,
+			HttpServletResponse response, Object object, Exception arg3)
+			throws Exception {
+		log.info("Request is complete");
 	}
-
 }
